@@ -1,13 +1,20 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace DemoWebShopFramework
 {
     public static class Browser
     {
-        static IWebDriver webDriver = new ChromeDriver(@"C:\CD");
+        private static IWebDriver webDriver;
+        public static WebDriverWait wait;
+
+        public static void Init()
+        {
+            webDriver = new ChromeDriver(@"C:\CD");
+            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
+        }
 
         public static string Title 
         { 
@@ -22,12 +29,11 @@ namespace DemoWebShopFramework
         public static void Goto(string url)
         {
             webDriver.Url = url;
-            Thread.Sleep(1000);
         }
 
         public static void Close()
         {
-            webDriver.Close();
+            webDriver.Quit();
         }
     }
 }
