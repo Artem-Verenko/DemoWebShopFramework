@@ -6,12 +6,12 @@ namespace DemoWebShopFramework
     public class СategoryPage
     {
         
-        [FindsBy(How = How.XPath, Using = "//div[@class=\"page-title\"]", Priority = 0)]
-        [FindsBy(How = How.ClassName, Using = "page-title", Priority = 1)]
-        private IWebElement categoryName;
+        
+        [FindsBy(How = How.ClassName, Using = "page-title")]
+        private IWebElement _categoryName;
         public string CategoryName 
         {
-            get { return this.categoryName.Text; }  
+            get { return _categoryName.Text; }  
         }
     }
 }

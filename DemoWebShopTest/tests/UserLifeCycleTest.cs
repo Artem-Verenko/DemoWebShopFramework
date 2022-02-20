@@ -13,8 +13,8 @@ namespace DemoWebShopTest.tests
             Pages.HomePage.Goto();
             //Pages.HomePage.Register().NewRegister("Artem", "Verenko", "artem@gmail.com", "1234561", "1234561");
             Pages.HomePage.Register().setFirstName("Artem").setLastName("Verenko")
-                .setEmail("artem@gmail.com").setPassword("1234561").setConfirmPassword("1234561").finishRegistration();
-            Assert.IsTrue(Pages.HomePage.IsAtCurrentLogin("artem@gmail.com"));
+                .setEmail("artem@gmail.com").setPassword("123456").setConfirmPassword("123456").finishRegistration();
+            Assert.AreEqual("artem@gmail.com", Pages.HomePage.GetCurrentLogin());
         }
 
         [Test]
@@ -22,7 +22,8 @@ namespace DemoWebShopTest.tests
         {
             Pages.LogInPage.Goto();
             Pages.LogInPage.NewLogIn("artem@gmail.com", "1234561");
-            Assert.IsTrue(Pages.HomePage.IsAtCurrentLogin("artem@gmail.com"));
+            Assert.AreEqual("artem@gmail.com", Pages.HomePage.GetCurrentLogin());
         }
     }
 }
+//Assert.AreEqual()

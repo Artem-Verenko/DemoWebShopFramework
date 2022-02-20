@@ -21,7 +21,7 @@ namespace DemoWebShopFramework
             get { return webDriver.Title; } 
         }
 
-        public static ISearchContext Driver 
+        public static IWebDriver Driver 
         {
             get { return webDriver; }
         }

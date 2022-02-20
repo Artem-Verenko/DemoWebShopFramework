@@ -12,7 +12,7 @@ namespace DemoWebShopTest
         public void Can_Go_To_HomePage()
         {
             Pages.HomePage.Goto();
-            Assert.IsTrue(Pages.HomePage.IsAt());
+            Assert.AreEqual("Demo Web Shop", Pages.HomePage.GetTitlePage());
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace DemoWebShopTest
         {
             Pages.HomePage.Goto();
             Pages.HomePage.SelectÑategory("Books");
-            Assert.IsTrue(Pages.HomePage.IsAtÑategoryPage("Books"));
+            Assert.AreEqual("Demo Web Shop. Books", Pages.HomePage.GetTitlePage());           
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace DemoWebShopTest
         {
             Pages.HomePage.Goto();
             Pages.HomePage.SelectÑategory("Jewelry");
-            Assert.IsTrue(Pages.HomePage.IsAtÑategoryPage("Jewelry"));
+            Assert.AreEqual("Demo Web Shop. Jewelry", Pages.HomePage.GetTitlePage());            
         }
 
     }

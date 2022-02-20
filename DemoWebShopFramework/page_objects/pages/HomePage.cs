@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using DemoWebShopFramework.page_objects.app;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using SeleniumExtras.PageObjects;
 using System;
@@ -8,56 +9,40 @@ namespace DemoWebShopFramework
     public class HomePage
     {
         private static string Url = "http://demowebshop.tricentis.com/";
-        private static string PageTitle = "Demo Web Shop";
 
-        [FindsBy(How = How.XPath, Using = "//a[@class=\"ico-register\"]")]
-        private IWebElement registerButton;
+        [FindsBy(How = How.ClassName, Using = "ico-register")]
+        private IWebElement _registerButton;
 
-        [FindsBy(How = How.XPath, Using = "//a[@class=\"ico-login\"]")]
-        private IWebElement logInButton;
+        [FindsBy(How = How.ClassName, Using = "ico-login")]
+        private IWebElement _logInButton;
 
         [FindsBy(How = How.ClassName, Using = "account")]
-        private IWebElement currentLogin;
+        private IWebElement _currentLogin;
 
         public void Goto()
         {
             Browser.Goto(Url);
+            WaitUtil.ShouldLocate(Browser.Driver, Url);
         }
-
-        public bool IsAt()
+        public string GetTitlePage()
         {
-            return Browser.Title == PageTitle;
+            return Browser.Title.Trim();
         }
 
         public void SelectСategory(string categoriesName)
         {
             var category = Browser.Driver.FindElement(By.XPath("//ul[@class=\"top-menu\"]//*[contains(text(),\"" + categoriesName +"\")]"));
             category.Click();
-        }
-
-        public bool IsAtСategoryPage(string categoryName)
-        {
-            var categoryPage = new СategoryPage();
-            PageFactory.InitElements(Browser.Driver, categoryPage);
-            return categoryPage.CategoryName == categoryName;
-        }
+        }      
      
         public RegisterPage Register()
         {
-            this.registerButton.Click();
+            _registerButton.Click();
             return new RegisterPage();
-        }
+        }        
 
-        public LogInPage LogIn()
-        {
-            this.logInButton.Click();
-            return new LogInPage();
+        public string GetCurrentLogin() {
+            return _currentLogin.Text.Trim();
         }
-
-        public bool IsAtCurrentLogin(string currentLogin)
-        {
-            return this.currentLogin.Text == currentLogin;
-        }
-
     }
 }
